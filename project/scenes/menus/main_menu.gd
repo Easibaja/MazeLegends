@@ -277,6 +277,24 @@ func _fetch_progress():
 
 
 func _on_progress_response(result, response_code, headers, body):
+	print("RESULT:", result)
+
+	match result:
+		HTTPRequest.RESULT_SUCCESS:
+			print("SUCCESS")
+		HTTPRequest.RESULT_CHUNKED_BODY_SIZE_MISMATCH:
+			print("CHUNKED_BODY_SIZE_MISMATCH")
+		HTTPRequest.RESULT_CANT_CONNECT:
+			print("CANT_CONNECT")
+		HTTPRequest.RESULT_CANT_RESOLVE:
+			print("CANT_RESOLVE")
+		HTTPRequest.RESULT_CONNECTION_ERROR:
+			print("CONNECTION_ERROR")
+		HTTPRequest.RESULT_TLS_HANDSHAKE_ERROR:
+			print("TLS_HANDSHAKE_ERROR")
+		_:
+			print("UNKNOWN RESULT")
+
 	var text = body.get_string_from_utf8()
 
 	print("===== PROGRESS RESPONSE =====")
