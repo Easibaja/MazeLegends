@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dextwut40lvl7"]
+
+[ext_resource type="Script" uid="uid://begk64yv8kiaw" path="res://3D Maze/player.gd" id="1_yeoc1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tt6r6"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1330286654]
+script = ExtResource("1_yeoc1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=588775881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_tt6r6")

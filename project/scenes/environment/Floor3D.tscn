@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c2304v340pycq"]
+
+[ext_resource type="Script" uid="uid://bimgfxo3c1ufm" path="res://3D Maze/floor_3d.gd" id="1_j37ce"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_up7at"]
+albedo_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j37ce"]
+material = SubResource("StandardMaterial3D_up7at")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s22w6"]
+
+[node name="Floor3d" type="StaticBody3D" unique_id=1104822640]
+script = ExtResource("1_j37ce")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1182509501]
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_j37ce")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1966154851]
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_s22w6")

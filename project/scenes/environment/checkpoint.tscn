@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bkq4hbebr0klp"]
+
+[ext_resource type="Script" uid="uid://cwkqfvwsq1fs7" path="res://3D Maze/checkpoint.gd" id="1_u010t"]
+
+[node name="Checkpoint" type="Area3D" unique_id=567958628 groups=["checkpoints"]]
+script = ExtResource("1_u010t")

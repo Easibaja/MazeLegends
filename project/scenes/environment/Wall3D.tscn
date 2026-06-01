@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ctved508oa2pq"]
+
+[ext_resource type="Script" uid="uid://xobqv4cts4ko" path="res://3D Maze/wall_3d.gd" id="1_ca52s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_moksf"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u7syp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fftue"]
+size = Vector3(0.8409424, 1, 1)
+
+[node name="Wall3d" type="StaticBody3D" unique_id=730395145]
+script = ExtResource("1_ca52s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=413646055]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_moksf")
+mesh = SubResource("BoxMesh_u7syp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1952092988]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_fftue")

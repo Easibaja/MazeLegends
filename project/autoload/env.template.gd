@@ -1,0 +1,4 @@
+extends Node
+
+const SUPABASE_URL = "PLACEHOLDER_URL"
+const SUPABASE_KEY = "PLACEHOLDER_KEY"

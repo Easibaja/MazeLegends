@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cr18xrhd6aotd"]
+
+[ext_resource type="Script" uid="uid://w13wqtbpc71k" path="res://3D Maze/maze_3d.gd" id="1_r7o83"]
+[ext_resource type="PackedScene" uid="uid://ctved508oa2pq" path="res://3D Maze/Wall3D.tscn" id="2_b45gf"]
+[ext_resource type="Script" uid="uid://bcqvh3pnxxpa6" path="res://3D Maze/camera_3d.gd" id="2_fsq78"]
+[ext_resource type="PackedScene" uid="uid://c2304v340pycq" path="res://3D Maze/Floor3D.tscn" id="3_rvewi"]
+[ext_resource type="PackedScene" uid="uid://bkq4hbebr0klp" path="res://3D Maze/checkpoint.tscn" id="4_x8ixb"]
+[ext_resource type="PackedScene" uid="uid://big4cqd3cibps" path="res://3D Maze/MayCharacter.tscn" id="5_rh3m1"]
+[ext_resource type="PackedScene" uid="uid://dtvaevjmm0ddv" path="res://3D Maze/hud.tscn" id="6_rh3m1"]
+
+[node name="Maze" type="Node3D" unique_id=1164703902]
+script = ExtResource("1_r7o83")
+wall_scene = ExtResource("2_b45gf")
+floor_scene = ExtResource("3_rvewi")
+checkpoint_scene = ExtResource("4_x8ixb")
+player_scene = ExtResource("5_rh3m1")
+hud_scene = ExtResource("6_rh3m1")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1763156733 groups=["camera"]]
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0, 5, 5)
+script = ExtResource("2_fsq78")

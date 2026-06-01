@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cixum7ttp8jeg"]
+
+[ext_resource type="PackedScene" uid="uid://dt5066irtlvtp" path="res://characters/Twilight For Unreal (with Animations)/Twilight_Character.FBX" id="1_85ysf"]
+[ext_resource type="Script" uid="uid://begk64yv8kiaw" path="res://3D Maze/player.gd" id="1_tt6r6"]
+[ext_resource type="AnimationLibrary" uid="uid://lfmw51et7pvs" path="res://characters/Twilight For Unreal (with Animations)/Animations/Twilight_Idle.FBX" id="2_ugwhc"]
+[ext_resource type="AnimationLibrary" uid="uid://btmawbffxufrm" path="res://characters/Twilight For Unreal (with Animations)/Animations/Twilight_JumpEnd.FBX" id="3_v1o22"]
+[ext_resource type="AnimationLibrary" uid="uid://wpf5m2ypkwi4" path="res://characters/Twilight For Unreal (with Animations)/Animations/Twilight_JumpLoop.FBX" id="4_w6gge"]
+[ext_resource type="AnimationLibrary" uid="uid://bh0e3fyiax3qc" path="res://characters/Twilight For Unreal (with Animations)/Animations/Twilight_JumpStart.FBX" id="5_fncty"]
+[ext_resource type="AnimationLibrary" uid="uid://c6kd7ydi82tqo" path="res://characters/Twilight For Unreal (with Animations)/Animations/Twilight_Run.FBX" id="6_ydyun"]
+[ext_resource type="AnimationLibrary" uid="uid://cr2nbluml8hx7" path="res://characters/Twilight For Unreal (with Animations)/Animations/Twilight_Walk.FBX" id="7_j23fb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_83jxo"]
+radius = 0.25
+height = 1.5
+
+[node name="Node3D" type="CharacterBody3D" unique_id=1973036572]
+script = ExtResource("1_tt6r6")
+
+[node name="Twilight_Character" parent="." unique_id=977754698 instance=ExtResource("1_85ysf")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.07, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1502253268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_83jxo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1889310139]
+root_node = NodePath("../Twilight_Character")
+libraries/Twilight_Idle = ExtResource("2_ugwhc")
+libraries/Twilight_JumpEnd = ExtResource("3_v1o22")
+libraries/Twilight_JumpLoop = ExtResource("4_w6gge")
+libraries/Twilight_JumpStart = ExtResource("5_fncty")
+libraries/Twilight_Run = ExtResource("6_ydyun")
+libraries/Twilight_Walk = ExtResource("7_j23fb")

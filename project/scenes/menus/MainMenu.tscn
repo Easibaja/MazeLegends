@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://hrvhm0u2mmbh"]
+
+[ext_resource type="Script" uid="uid://6m0lm3us7433" path="res://scenes/menus/main_menu.gd" id="1_cgpba"]
+[ext_resource type="PackedScene" uid="uid://cr18xrhd6aotd" path="res://scenes/levels/Maze3D.tscn" id="2_5hvkw"]
+
+[node name="MainMenu" type="Control" unique_id=719437710]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cgpba")
+maze_scene = ExtResource("2_5hvkw")
