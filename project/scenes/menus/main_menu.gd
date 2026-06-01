@@ -228,6 +228,15 @@ func _assign_algorithm():
 func _on_assign_algorithm_response(result, response_code, headers, body):
 	var text = body.get_string_from_utf8()
 
+	print("===== ASSIGN ALGORITHM RESPONSE =====")
+	print("Result: ", result)
+	print("HTTP Code: ", response_code)
+	print("Headers: ", headers)
+	print("Body length: ", text.length())
+	print("Body:")
+	print(text)
+	print("====================================")
+
 	if response_code != 200:
 		_show_error("Failed to assign algorithm")
 		return
@@ -235,11 +244,13 @@ func _on_assign_algorithm_response(result, response_code, headers, body):
 	var parsed = JSON.parse_string(text)
 
 	if typeof(parsed) != TYPE_STRING:
+		print("Parsed type was: ", typeof(parsed))
 		_show_error("Invalid server response")
 		return
 
 	algorithm = parsed
 	print("Assigned algorithm: ", algorithm)
+
 	_fetch_progress()
 
 
@@ -257,6 +268,9 @@ func _fetch_progress():
 	]
 	var err = http.request(url, headers, HTTPClient.METHOD_GET)
 
+	print("Progress request err: ", err)
+	print("Progress URL: ", url)
+
 	if err != OK:
 		_show_error("Failed to fetch progress")
 
@@ -264,13 +278,30 @@ func _fetch_progress():
 func _on_progress_response(result, response_code, headers, body):
 	var text = body.get_string_from_utf8()
 
+	print("===== PROGRESS RESPONSE =====")
+	print("Result: ", result)
+	print("HTTP Code: ", response_code)
+	print("Headers: ", headers)
+	print("Body length: ", text.length())
+	print("Body:")
+	print(text)
+	print("================================")
+
 	if response_code != 200:
 		_show_error("Failed to load progress")
 		return
 
 	var parsed = JSON.parse_string(text)
 
+	if parsed == null:
+		print("JSON PARSE FAILED")
+		print("Raw text was:")
+		print(text)
+		_show_error("JSON parse failed")
+		return
+
 	if typeof(parsed) != TYPE_ARRAY:
+		print("Expected ARRAY but got type: ", typeof(parsed))
 		_show_error("Invalid progress data")
 		return
 
@@ -279,6 +310,10 @@ func _on_progress_response(result, response_code, headers, body):
 		return
 
 	var data = parsed[0]
+
+	print("Participant data:")
+	print(data)
+
 	level_1_cleared = data["level_1_cleared"]
 	level_2_cleared = data["level_2_cleared"]
 	level_3_cleared = data["level_3_cleared"]
