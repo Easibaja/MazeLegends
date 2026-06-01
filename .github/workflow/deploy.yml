@@ -1,0 +1,30 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  export-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject env variables
+        run: |
+          sed 's/PLACEHOLDER_URL/${{ secrets.SUPABASE_URL }}/g; s/PLACEHOLDER_KEY/${{ secrets.SUPABASE_KEY }}/g' \
+            project/autoload/env.template.gd > project/autoload/env.gd
+
+      - name: Export Godot project
+        uses: dulvui/godot-4-html-export@v2
+        with:
+          godot-version: "4.6.1"
+          working-directory: "project"
+          export-path: "../build/web/index.html"
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
