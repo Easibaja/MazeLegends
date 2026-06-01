@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1780343881|724579941';
+const CACHE_VERSION = '1780346730|14736516';
 /** @type {string} */
 const CACHE_PREFIX = 'Maze-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
