@@ -259,43 +259,35 @@ func _fetch_progress():
 	add_child(http)
 	http.request_completed.connect(_on_progress_response)
 
-	var url = "%s/rest/v1/participant_sessions?college_id=eq.%s&select=*" % [
-		SUPABASE_URL, college_id
+	var url = "%s/rest/v1/participant_sessions?college_id=eq.%s&select=level_1_cleared,level_2_cleared,level_3_cleared" % [
+		SUPABASE_URL,
+		college_id
 	]
+
 	var headers = [
 		"apikey: " + SUPABASE_API_KEY,
 		"Authorization: Bearer " + SUPABASE_API_KEY,
 		"Accept: application/json",
 		"Accept-Encoding: identity"
 	]
-	var err = http.request(url, headers, HTTPClient.METHOD_GET)
 
-	print("Progress request err: ", err)
-	print("Progress URL: ", url)
+	print("===== FETCH PROGRESS =====")
+	print("URL: ", url)
+	print("Headers: ", headers)
+
+	var err = http.request(
+		url,
+		headers,
+		HTTPClient.METHOD_GET
+	)
+
+	print("Request error: ", err)
 
 	if err != OK:
 		_show_error("Failed to fetch progress")
 
 
 func _on_progress_response(result, response_code, headers, body):
-	print("RESULT:", result)
-
-	match result:
-		HTTPRequest.RESULT_SUCCESS:
-			print("SUCCESS")
-		HTTPRequest.RESULT_CHUNKED_BODY_SIZE_MISMATCH:
-			print("CHUNKED_BODY_SIZE_MISMATCH")
-		HTTPRequest.RESULT_CANT_CONNECT:
-			print("CANT_CONNECT")
-		HTTPRequest.RESULT_CANT_RESOLVE:
-			print("CANT_RESOLVE")
-		HTTPRequest.RESULT_CONNECTION_ERROR:
-			print("CONNECTION_ERROR")
-		HTTPRequest.RESULT_TLS_HANDSHAKE_ERROR:
-			print("TLS_HANDSHAKE_ERROR")
-		_:
-			print("UNKNOWN RESULT")
-
 	var text = body.get_string_from_utf8()
 
 	print("===== PROGRESS RESPONSE =====")
@@ -305,23 +297,23 @@ func _on_progress_response(result, response_code, headers, body):
 	print("Body length: ", text.length())
 	print("Body:")
 	print(text)
-	print("================================")
+	print("============================")
 
 	if response_code != 200:
 		_show_error("Failed to load progress")
 		return
 
+	if text.is_empty():
+		_show_error("Empty response body")
+		return
+
 	var parsed = JSON.parse_string(text)
 
 	if parsed == null:
-		print("JSON PARSE FAILED")
-		print("Raw text was:")
-		print(text)
 		_show_error("JSON parse failed")
 		return
 
 	if typeof(parsed) != TYPE_ARRAY:
-		print("Expected ARRAY but got type: ", typeof(parsed))
 		_show_error("Invalid progress data")
 		return
 
@@ -330,9 +322,6 @@ func _on_progress_response(result, response_code, headers, body):
 		return
 
 	var data = parsed[0]
-
-	print("Participant data:")
-	print(data)
 
 	level_1_cleared = data["level_1_cleared"]
 	level_2_cleared = data["level_2_cleared"]
