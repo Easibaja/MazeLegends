@@ -265,7 +265,7 @@ func _fetch_progress():
 	var headers = [
 		"apikey: " + SUPABASE_API_KEY,
 		"Authorization: Bearer " + SUPABASE_API_KEY,
-		"Content-Type: application/json"
+		"Accept-Encoding: identity"
 	]
 	var err = http.request(url, headers, HTTPClient.METHOD_GET)
 
