@@ -249,7 +249,7 @@ func _on_assign_algorithm_response(result, response_code, headers, body):
 		return
 
 	algorithm = parsed
-	print("Assigned algorithm: ", algorithm)
+	print("Assigned algorithm: ", algorithm, " HELP!")
 
 	_fetch_progress()
 
